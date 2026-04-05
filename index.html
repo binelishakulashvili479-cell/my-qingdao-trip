@@ -4,140 +4,503 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>青岛四天三晚浪漫之旅</title>
+  <title>青岛听海之旅 - 行程手册</title>
   <style>
-    :root {
-      --primary-color: #0077b6;
-      --bg-color: #f0f8ff;
-      --text-color: #333;
+    /* 基础样式重置 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* 平滑滚动 */
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background-color: #f0f8ff;
+      color: #333;
       line-height: 1.6;
-      margin: 0;
-      padding: 0;
     }
 
-    header {
-      background: linear-gradient(to right, #0077b6, #00b4d8);
+    /* 顶部视觉区 */
+    .hero {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
       color: white;
       text-align: center;
-      padding: 2.5rem 0;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 60px 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
+    .hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    /* 导航 */
+    .timeline-nav {
+      background: white;
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 12px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      z-index: 100;
+    }
+
+    .timeline-nav a {
+      text-decoration: none;
+      color: #007bb5;
+      font-size: 0.9rem;
+      font-weight: bold;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    /* 主体 */
     .container {
       max-width: 800px;
-      margin: 30px auto;
-      padding: 0 20px;
+      margin: 20px auto;
+      padding: 0 15px;
     }
 
     .day-card {
       background: white;
       border-radius: 12px;
-      padding: 25px;
-      margin-bottom: 25px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s ease;
-    }
-
-    .day-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-      color: var(--primary-color);
-      border-bottom: 2px solid #caf0f8;
-      padding-bottom: 8px;
-      margin-top: 0;
-    }
-
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    li {
-      margin-bottom: 12px;
-      padding-left: 28px;
-      position: relative;
-    }
-
-    li::before {
-      content: "🌊";
-      position: absolute;
-      left: 0;
-    }
-
-    .tips {
-      background-color: #e8f4f8;
-      border-left: 5px solid var(--primary-color);
       padding: 20px;
-      margin-top: 40px;
-      border-radius: 0 8px 8px 0;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
-    .tips h3 {
-      margin-top: 0;
-      color: var(--primary-color);
+    .section-title,
+    .day-title {
+      font-size: 1.4rem;
+      color: #2c3e50;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* 清单样式 */
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .check-item input {
+      margin-right: 8px;
+      width: 16px;
+      height: 16px;
+      accent-color: #4facfe;
+    }
+
+    /* 行程线 */
+    .timeline-list {
+      list-style: none;
+      border-left: 2px solid #e1f5fe;
+      padding-left: 20px;
+      margin-left: 10px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -27px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      background: #4facfe;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+
+    .time {
+      font-weight: bold;
+      color: #0277bd;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .img-box {
+      margin-top: 10px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .img-box img {
+      width: 100%;
+      display: block;
+    }
+
+    .date-badge {
+      background: #e1f5fe;
+      color: #0277bd;
+      padding: 2px 10px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      float: right;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      color: #999;
+      font-size: 0.8rem;
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <h1>青岛四天三晚浪漫之旅 ⛵</h1>
-    <p>红瓦绿树，碧海蓝天 —— 专属两人的海滨记忆</p>
+
+  <header class="hero">
+    <h1>青岛听海之旅</h1>
+    <p>2026.04.16 - 04.19</p>
   </header>
 
-  <div class="container">
-    <section class="day-card">
-      <h2>Day 1: 初识青岛，漫步老城</h2>
-      <ul>
-        <li><strong>上午：</strong> 抵达青岛，建议将住宿定在【老城区】（如地铁站附近），交通便利且充满复古气息。</li>
-        <li><strong>下午：</strong> 游览【栈桥】感受海风，随后步行前往【天主教堂】，哥特式建筑非常出片，适合两人合影打卡。</li>
-        <li><strong>傍晚：</strong> 登【信号山公园】，漫步上山不仅能稍微活动一下筋骨，还能俯瞰“红瓦绿树，碧海蓝天”的全景，看一场浪漫的日落。</li>
-        <li><strong>晚餐：</strong> 劈柴院或台东夜市。推荐尝试清蒸黄花鱼、蒜蓉粉丝扇贝等海鲜，肉质细嫩好咀嚼，不费牙，且完全不含乳制品，大快朵颐无负担。</li>
-      </ul>
+  <nav class="timeline-nav">
+    <a href="#prep">物品清单</a>
+    <a href="#day1">Day 1</a>
+    <a href="#day2">Day 2</a>
+    <a href="#day3">Day 3</a>
+    <a href="#day4">Day 4</a>
+    <a href="#food-guide">美食清单</a>
+  </nav>
+
+  <main class="container">
+
+    <section id="prep" class="day-card" style="border-top: 5px solid #ffb74d;">
+      <h2 class="section-title">🎒 行前物品准备</h2>
+
+      <div style="margin-bottom: 20px;">
+        <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">证件与酒店信息：</p>
+        <div class="img-box" style="margin-bottom: 10px;">
+          <img src="车票.jpg" alt="车票">
+        </div>
+        <div class="img-box">
+          <img src="酒店信息.jpg" alt="酒店信息">
+        </div>
+      </div>
+
+      <div class="checklist">
+        <label class="check-item"><input type="checkbox"> 身份证</label>
+        <label class="check-item"><input type="checkbox"> 学生证</label>
+
+        <label class="check-item"><input type="checkbox"> 牙刷/牙膏</label>
+        <label class="check-item"><input type="checkbox"> 洗发/沐浴露</label>
+        <label class="check-item"><input type="checkbox"> 洗面奶</label>
+        <label class="check-item"><input type="checkbox"> 浴巾</label>
+        <label class="check-item"><input type="checkbox"> 马桶坐垫</label>
+        <label class="check-item"><input type="checkbox"> 床上三件套</label>
+        <label class="check-item"><input type="checkbox"> 拖鞋</label>
+
+        <label class="check-item"><input type="checkbox"> 充电宝</label>
+        <label class="check-item"><input type="checkbox"> 充电线/头</label>
+
+        <label class="check-item"><input type="checkbox"> 肠胃药</label>
+        <label class="check-item"><input type="checkbox"> 创可贴</label>
+        <label class="check-item"><input type="checkbox"> 止痛药</label>
+        <label class="check-item"><input type="checkbox"> 正畸清洁工具</label> <label class="check-item"><input
+            type="checkbox"> 厚一点的衣服</label>
+        <label class="check-item"><input type="checkbox"> 雨伞</label>
+        <label class="check-item"><input type="checkbox"> 保温杯</label>
+        <label class="check-item"><input type="checkbox"> 墨镜/防晒霜</label> <label class="check-item"><input
+            type="checkbox"> 湿巾/纸巾</label>
+        <label class="check-item"><input type="checkbox"> 无乳糖零食</label>
+      </div>
     </section>
 
-    <section class="day-card">
-      <h2>Day 2: 文艺海岸，山海相恋</h2>
-      <ul>
-        <li><strong>上午：</strong> 前往【八大关】，这里有万国建筑群，林荫大道极其幽静，适合牵手漫步。</li>
-        <li><strong>下午：</strong> 顺着海岸线走到【第二海水浴场】踩沙滩，然后前往网红打卡地【小麦岛公园】，坐在海边草坪上听听街头音乐。</li>
-        <li><strong>傍晚：</strong> 前往【奥帆中心】与【情人坝】。情人坝上有白色的灯塔，夜晚海风微拂，是绝佳的约会圣地。</li>
-        <li><strong>晚餐：</strong> 找一家评分不错的海鲜大排档，点一盘辣炒蛤蜊，配上正宗的青岛原浆（注意适量饮酒，保护肌肉合成哦）。</li>
+    <section id="day1" class="day-card">
+      <span class="date-badge">4月16日</span>
+      <h2 class="section-title">Day 1：青岛初印象 · 漫步与灯光</h2>
+
+      <ul class="timeline-list">
+        <li class="timeline-item">
+          <span class="time">05:38 - 12:00</span>
+          <p>抵达北站、早市过早、酒店补觉。<strong>建议 13:00 左右出发。</strong></p>
+        </li>
+
+        <li class="timeline-item" style="border-left: 2px dashed #4facfe; padding-left: 0; margin-left: -2px;">
+          <div
+            style="background: #fdfdfd; border: 1px solid #e1f5fe; border-radius: 12px; padding: 18px; margin-left: 20px;">
+            <p style="font-weight: bold; color: #2c3e50; margin-bottom: 8px;">☀️ 方案 A：晴空万里（老城建筑与海滨漫步）</p>
+            <p style="font-size: 0.9rem; color: #555;">
+              <strong>路线：</strong>天主教堂 → 鲁迅公园 → 琴屿路<br>
+              <strong>亮点：</strong>先去<strong>圣弥厄尔大教堂</strong>拍欧式大片；随后去<strong>鲁迅公园</strong>走走红礁石海岸；傍晚一定要在<strong>琴屿路</strong>等日落，那里有“最孤独的树”和极美的海边公路，非常有电影感。
+            </p>
+          </div>
+
+          <div
+            style="background: #fdfdfd; border: 1px solid #e1f5fe; border-radius: 12px; padding: 18px; margin-left: 20px; margin-top: 12px;">
+            <p style="font-weight: bold; color: #2c3e50; margin-bottom: 8px;">☁️ 方案 B：天气一般（博物馆人文与建筑）</p>
+            <p style="font-size: 0.9rem; color: #555;">
+              <strong>路线：</strong>啤酒博物馆 → 八大关<br>
+              <strong>亮点：</strong>室内参观<strong>啤酒博物馆</strong>不受天气影响；随后去<strong>八大关</strong>看风格各异的异国建筑（花石楼、公主楼等），即使阴天，那里的林荫大道和老建筑也很有氛围。
+            </p>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <span class="time">19:30</span>
+          <p>前往 <strong>第三海水浴场</strong>。这里是观赏<strong>青岛浮山湾灯光秀</strong>的最佳位置之一，感受现代青岛的璀璨夜景。</p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="time">20:30</span>
+          <p><strong>晚餐建议：</strong>从下方美食清单挑选。若在三浴附近，可以考虑去台东步行街或江西路附近的餐厅。</p>
+        </li>
       </ul>
+
+      <div style="background: #fff9f0; border-radius: 12px; padding: 20px; border: 1px solid #ffecb3;">
+        <p
+          style="font-weight: bold; color: #f57c00; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          🍴 第一天待选美食 (已按特色整理)
+        </p>
+        <div class="checklist" style="grid-template-columns: 1fr 1fr;">
+          <label class="check-item"><input type="checkbox"> 鲅鱼水饺 (青岛特色)</label>
+          <label class="check-item"><input type="checkbox"> 辣炒蛤蜊 (必点)</label>
+          <label class="check-item"><input type="checkbox"> 海鲜卤面</label>
+          <label class="check-item"><input type="checkbox"> 排骨米饭</label>
+          <label class="check-item"><input type="checkbox"> 青岛特色野馄饨</label>
+          <label class="check-item"><input type="checkbox"> 电烤肉/红漆烤肉</label>
+        </div>
+        <p style="font-size: 0.8rem; color: #a1887f; margin-top: 10px;">* 小贴士：吃海鲜记得配点大蒜，海边温差大注意保暖。</p>
+      </div>
     </section>
 
-    <section class="day-card">
-      <h2>Day 3: 寻仙崂山，强健体魄</h2>
-      <ul>
-        <li><strong>全天：</strong> 【崂山风景区】（建议走太清宫-仰口路线）。既能欣赏山海奇观，又能有中等强度的徒步锻炼。两人一起爬山看海，体验感拉满。</li>
-        <li><strong>午餐：</strong> 在景区附近品尝农家宴，推荐崂山菇炖鸡，高蛋白且汤汁鲜美，营养丰富又好咀嚼。</li>
-        <li><strong>晚上：</strong> 回到市区休息，可以去【台东步行街】逛逛，感受青岛的市井烟火气。</li>
+    <section id="day2" class="day-card" style="border-left-color: #00e5ff;">
+      <span class="date-badge">4月17日</span>
+      <h2 class="section-title">Day 2：漫步山海 · 醉美小麦岛</h2>
+
+      <ul class="timeline-list">
+        <li class="timeline-item">
+          <span class="time">上午</span>
+          <p>在酒店充分休息或在附近寻找地道小吃。建议中午 13:00 前后出发。</p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="time">13:30 - 15:30</span>
+          <p>前往 <strong>台东步行街</strong>。这是青岛最热闹的商圈，可以逛逛各种创意小店，顺便在那里解决午餐或下午茶。</p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="time">16:00 - 17:30</span>
+          <p>前往 <strong>燕儿岛山公园</strong>。这里的海边木栈道非常有层次感，一侧是断崖礁石，一侧是大海，非常适合并肩漫步，空气里都是海的味道。</p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="time">18:00 - 19:30</span>
+          <p>
+            <strong>核心行程：小麦岛看日落</strong><br>
+            从燕儿岛沿着海岸线步行即可到达。在<strong>落日草坪</strong>坐下，听着流浪歌手的民谣，看太阳一点点沉入海平面，天边染上橘子色的晚霞。
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="time">晚上</span>
+          <p>从岛上出来后，可以去附近的<strong>中联广场</strong>或<strong>万象城</strong>。那里有很多环境优雅且不费牙的精致餐厅，适合舒舒服服吃顿大餐。</p>
+        </li>
       </ul>
+
+      <div style="background: #e1f5fe; border-radius: 12px; padding: 20px; border: 1px solid #81d4fa;">
+        <p style="font-weight: bold; color: #0277bd; margin-bottom: 12px;">🌟 Day 2 游玩贴士</p>
+        <div class="checklist" style="grid-template-columns: 1fr;">
+          <label class="check-item"><input type="checkbox"> 交通：台东去燕儿岛建议直接打车，省力且能留足体力逛海边。</label>
+          <label class="check-item"><input type="checkbox"> 穿衣：小麦岛海风极大，即使下午暖和，落日后温差很大，<strong>务必穿上厚外套</strong>。</label>
+          <label class="check-item"><input type="checkbox">
+            饮食建议：推荐尝试<strong>新鲜榨出的果汁</strong>或<strong>清爽的青岛啤酒</strong>（搭配煮熟的海鲜非常稳妥）。</label>
+          <label class="check-item"><input type="checkbox"> 舒缓选择：晚上可以找一家评价好的<strong>蒸汽海鲜</strong>，口感鲜嫩且容易咀嚼。</label>
+        </div>
+      </div>
     </section>
 
-    <section class="day-card">
-      <h2>Day 4: 城市地标，满载而归</h2>
-      <ul>
-        <li><strong>上午：</strong> 【五四广场】打卡“五月的风”雕塑，沿着海滨木栈道做最后的留恋。</li>
-        <li><strong>下午：</strong> 前往【大学路】网红墙（大学路与鱼山路交汇处）拍几张文艺复古照。</li>
-        <li><strong>返程：</strong> 购买一些青岛特产（如海鲜干货），带着美好的回忆返程。</li>
+    <section id="day3" class="day-card" style="border-left-color: #43a047;">
+      <span class="date-badge">4月18日</span>
+      <h2 class="section-title">Day 3：海边日出 · 漫画老城 · 崂山寻径</h2>
+
+      <ul class="timeline-list">
+        <li class="timeline-item">
+          <span class="time">05:10 - 07:30</span>
+          <p>
+            <strong>日出与赶海：</strong>建议前往 <strong>石老人海水浴场</strong> 或 <strong>雕塑园海滩</strong>。
+            4月中旬日出约在 5:20 左右。看完日出趁着退潮，可以体验赶海（记得带上你的创可贴，礁石容易划伤）。
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="time">09:00 - 11:00</span>
+          <p>
+            <strong>童话老城打卡：</strong>前往 <strong>龙江路（宫崎骏漫画墙）</strong>。
+            这里满墙的龙猫、千与千寻涂鸦非常可爱。接着步行去附近的 <strong>大学路红墙</strong>（网红拐角）拍一张经典照片。
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="time">12:30 - 17:30</span>
+          <p>
+            <strong>海上仙山：崂山风景区（仰口线）</strong><br>
+            建议选<strong>仰口游览区</strong>，这是崂山唯一能看“山海相连”最震撼的地方。
+            乘坐索道上山，打卡“寿”字峰，最后到达<strong>天苑</strong>，俯瞰整个仰口湾。
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="time">18:30</span>
+          <p>
+            <strong>晚餐补充：</strong>从崂山回来，一定要买个比脸还大的 <strong>王哥庄大馒头</strong>！
+            晚上可以去吃顿正宗的<strong>崂山菇炖鸡</strong>，或者找一家渔家乐，尝试一下<strong>海肠捞饭</strong>。
+          </p>
+        </li>
       </ul>
+
+      <div style="background: #e8f5e9; border-radius: 12px; padding: 20px; border: 1px solid #c8e6c9;">
+        <p style="font-weight: bold; color: #2e7d32; margin-bottom: 12px;">💡 第三天深度建议</p>
+        <div class="checklist" style="grid-template-columns: 1fr;">
+          <label class="check-item"><input type="checkbox"> <strong>赶海装备：</strong>如果没带铲子，早市或路边摊买个最便宜的就行。</label>
+          <label class="check-item"><input type="checkbox"> <strong>崂山交通：</strong>去仰口建议坐
+            <strong>地铁11号线</strong>（被称为最美地铁线），窗外全是风景。</label>
+          <label class="check-item"><input type="checkbox"> <strong>网红墙拍照：</strong>龙江路和大学路人很多，建议错位拍摄或者找一些支巷的小涂鸦。</label>
+          <label class="check-item"><input type="checkbox">
+            <strong>关于崂山：</strong>山上温差大，风极强，一定要带上清单里的<strong>厚衣服</strong>。</label>
+        </div>
+      </div>
     </section>
 
-    <div class="tips">
-      <h3>💡 出行小贴士</h3>
-      <p>青岛上下坡较多，仿佛一个立体的迷宫，记得两人都穿舒适的运动鞋。饮食上，沿海城市主打海鲜，点餐时多选择清蒸、白灼或蒜蓉的做法，原汁原味且易咀嚼，也能很好地控制油脂摄入，保持好身材。祝你们玩得开心！</p>
-    </div>
-  </div>
+    <section id="day4" class="day-card" style="border-left-color: #9e9e9e;">
+      <span class="date-badge">4月19日</span>
+      <h2 class="section-title">Day 4：漫步余味 · 踏上归途</h2>
+
+      <ul class="timeline-list">
+        <li class="timeline-item">
+          <span class="time">上午</span>
+          <p>
+            <strong>弹性休整：</strong>睡到自然醒，根据第三天晚上的心情决定。
+            <br>· 选项 1：去补打卡前几天因天气没去成的景点。
+            <br>· 选项 2：去当地超市（如利群、盒马）买点地道特产（钙奶饼干、崂山可乐、即墨老酒等）。
+            <br>· 选项 3：在酒店附近散散步，整理这几天的照片和行李。
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="time">11:30 - 13:00</span>
+          <p>
+            <strong>告别午餐：</strong>找一家评价好的鲁菜馆或海鲜饺子馆。
+            建议尝试：<strong>全家福水饺</strong>（五颜六色很漂亮）、<strong>炸肉</strong>或<strong>京酱肉丝</strong>（补充蛋白质且不费牙）。
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="time">14:00+</span>
+          <p>
+            <strong>返程：</strong>回酒店取行李。由于酒店就在沧安路地铁站（1号线），距离<strong>青岛北站</strong>仅一站路，预留 30-40 分钟出发即可。
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="time">下午/傍晚</span>
+          <p>乘坐高铁返回郑州。在车上休息，回顾这趟浪漫的听海之旅。</p>
+        </li>
+      </ul>
+
+      <div style="background: #eceff1; border-radius: 12px; padding: 20px; border: 1px solid #cfd8dc;">
+        <p style="font-weight: bold; color: #455a64; margin-bottom: 12px;">✅ 离青前最后确认</p>
+        <div class="checklist" style="grid-template-columns: 1fr 1fr;">
+          <label class="check-item"><input type="checkbox"> 确认身份证、学生证</label>
+          <label class="check-item"><input type="checkbox"> 检查充电器/充电宝</label>
+          <label class="check-item"><input type="checkbox"> 检查洗漱包及正畸盒</label>
+          <label class="check-item"><input type="checkbox"> 确认高铁站：青岛北站</label>
+          <label class="check-item"><input type="checkbox"> 检查是否遗落衣物</label>
+          <label class="check-item"><input type="checkbox"> 给相机/手机腾出内存</label>
+        </div>
+      </div>
+    </section>
+
+    <section id="food-guide" class="day-card" style="border-left-color: #ff7043; margin-top: 40px;">
+      <div class="day-header">
+        <h2 class="day-title">🍽️ 青岛必吃美食打卡清单</h2>
+      </div>
+
+      <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">
+        精选美食清单，吃海鲜大餐的同时兼顾高蛋白与轻松咀嚼，打卡一家勾选一家！
+      </p>
+
+      <div
+        style="background: #fff3e0; border-radius: 12px; padding: 20px; border: 1px solid #ffe0b2; margin-bottom: 20px;">
+        <h3 style="color: #e65100; font-size: 1.1rem; margin-bottom: 12px;">✅ 你的心愿单</h3>
+        <div class="checklist" style="grid-template-columns: 1fr;">
+          <label class="check-item"><input type="checkbox">
+            <strong>前海沿：</strong>必点【海肠捞饭】和【鲅鱼水饺】。海肠脆嫩切得碎，鲅鱼馅料极其软糯细腻，是不费牙的绝佳碳水与蛋白组合。
+          </label>
+          <label class="check-item"><input type="checkbox">
+            <strong>西镇电烤肉：</strong>老青岛的灵魂烤肉，肉质鲜嫩多汁，大口吃肉补充优质蛋白质的好地方。
+          </label>
+          <label class="check-item"><input type="checkbox">
+            <strong>地二鱼汤馄饨：</strong>鱼汤极其鲜美，馄饨皮薄馅大，入口即化，吃完胃里非常舒服。
+          </label>
+          <label class="check-item"><input type="checkbox">
+            <strong>清真老马家海鲜大排档：</strong>现捞现做，纯正的海鲜做法保留了原汁原味，避开了复杂的调料。
+          </label>
+          <label class="check-item"><input type="checkbox">
+            <strong>李村夜市：</strong>规模超大，晚上去逛吃感受青岛最浓的烟火气。
+          </label>
+          <label class="check-item"><input type="checkbox">
+            <strong>兴山路早市：</strong>（已安排在第一天）体会最具性价比的青岛早晨。
+          </label>
+        </div>
+      </div>
+
+      <div style="background: #e8eaf6; border-radius: 12px; padding: 20px; border: 1px solid #c5cae9;">
+        <h3 style="color: #283593; font-size: 1.1rem; margin-bottom: 12px;">✨ 独家补充推荐</h3>
+        <div class="checklist" style="grid-template-columns: 1fr;">
+          <label class="check-item"><input type="checkbox">
+            <strong>万和春排骨米饭：</strong>青岛老字号！排骨炖得完全脱骨，轻轻一抿肉就下来了，不仅极其软烂，还能提供满满的肉类蛋白。
+          </label>
+          <label class="check-item"><input type="checkbox">
+            <strong>双合园 / 船歌鱼水饺：</strong>可以尝尝特色的【墨鱼水饺】（黑色皮）和【黄花鱼水饺】（黄色皮），鱼肉馅料细腻，吃起来毫无负担。
+          </label>
+          <label class="check-item"><input type="checkbox">
+            <strong>蒸汽海鲜（找评分高的连锁即可）：</strong>将各类新鲜贝类直接上锅纯蒸，高蛋白低脂肪，原汁原味，做法极其干净。
+          </label>
+        </div>
+      </div>
+
+      <div
+        style="margin-top: 20px; padding: 15px; border-left: 4px solid #fbc02d; background: #fffde7; border-radius: 4px;">
+        <p style="font-weight: bold; color: #f57f17; margin-bottom: 5px;">💡 贴心点单提示：</p>
+        <ul style="padding-left: 20px; font-size: 0.9rem; color: #555;">
+          <li>青岛传统海鲜做法基本不涉及奶制品，可以放心大胆吃。</li>
+          <li>点部分羹汤类（如海鲜疙瘩汤）时，如果不想要蛋黄，记得提前叮嘱老板不加或者只要蛋清。</li>
+          <li>吃海鲜时适量搭配点大蒜或醋，对肠胃更友好。</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>祝你们在青岛玩得开心！☀️🌊</p>
+  </footer>
+
 </body>
 
 </html>
